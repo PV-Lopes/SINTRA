@@ -2,7 +2,7 @@
 
 ## 🧭 Overview
 
-**SIPAT** Sistema de Transito Inteligente
+**SIPAT** Sistema Inteligente de Prevençao de Acidentes de Trânsito
 
 ---
 ## Website link:
