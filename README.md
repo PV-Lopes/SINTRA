@@ -7,12 +7,12 @@
 ---
 ## Website link:
 
-https://webapp-sabor-caseiro.azurewebsites.net
+https://webapp-sabor-caseiro.azurewebsites.net (remover ou substituir)
 
 ## ✅ Features
 
-- Table reservation with date and time
-- Order management
+- Table reservation with date and time (remover ou substituir)
+- Order management (remover ou substituir)
 - Scalable backend using Node.js
 - Automatic CI/CD through GitHub Actions
 - Infrastructure as Code (IaC) using Terraform
@@ -22,7 +22,7 @@ https://webapp-sabor-caseiro.azurewebsites.net
 
 ## 🛠️ Tech Stack
 
-- **Node.js**
+- **Node.js** 
 - **Express**
 - **Terraform (Azure Provider)**
 - **GitHub Actions**
