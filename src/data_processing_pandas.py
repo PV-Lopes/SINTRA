@@ -29,7 +29,7 @@ def definir_periodo(hora):
 
 df['periodo'] = df['hora'].apply(definir_periodo)
 
-# 4. Simula dados populacionais do IBGE (erro com api provavelmente ele caio novamente ou não possue os dados que preciso, logo a arte do improviso🦊)
+# 4. Simula dados populacionais do IBGE (erro com api provavelmente ele caiu novamente ou não possue os dados que preciso, logo a arte do improviso🦊)
 ibge_data = [
     {"municipio": "SÃO PAULO", "populacao": 12325232},
     {"municipio": "RIO DE JANEIRO", "populacao": 6748000},
