@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 from flask import request, redirect, session
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,20 +8,21 @@ import qrcode
 import io
 import base64
 
-# 1. Importa a variável 'app' do seu arquivo original
+load_dotenv()
+
+# 1. Importa a variável 'app'
 from dashboard import app
 
 # --- INÍCIO DA CONFIGURAÇÃO DE SEGURANÇA ---
-# 2. Pega o servidor Flask que o Dash usa por baixo dos panos
 server = app.server
-server.config['SECRET_KEY'] = 'minha-chave-secreta-para-o-wrapper'
+server.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'uma-chave-padrao')
 
 # 3. Configura o Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(server)
 login_manager.login_view = '/login'
 
-# 4. Define o modelo de usuário (pode ficar neste arquivo)
+# 4. Define o modelo de usuário
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
@@ -49,7 +52,6 @@ def login():
             session['email_for_mfa'] = email
             return redirect('/login/mfa')
         else:
-            # [CORRIGIDO] Chamada direta para a função, sem o f-string extra
             return get_login_form_html(error="Usuário ou senha inválidos.")
             
     return get_login_form_html()
@@ -68,7 +70,6 @@ def login_mfa():
             session.pop('email_for_mfa', None)
             return redirect('/')
         else:
-            # [CORRIGIDO] Chamada direta para a função, sem o f-string extra
             return get_mfa_form_html(error="Código MFA inválido.")
             
     return get_mfa_form_html()
@@ -99,7 +100,6 @@ def setup_mfa(user_email):
 
 # --- FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN ---
 def get_login_form_html(error=None):
-    # [CORRIGIDO] Adicionada a definição de error_html que estava faltando
     error_html = f'<p style="color:red;">{error}</p>' if error else ""
     return f'''
         <h1>Login - Passo 1 de 2</h1>
