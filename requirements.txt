@@ -1,0 +1,13 @@
+pandas
+matplotlib
+seaborn
+plotly
+dash
+openpyxl
+scikit-learn
+joblib
+flask-login
+pyotp
+qrcode[pil]
+gunicorn
+Werkzeug
