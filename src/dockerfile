@@ -16,5 +16,4 @@ COPY . .
 EXPOSE 8050
 
 # 6. Comando de Execução.
-# Ele vai executar o arquivo 'run_secure_app.py' e encontrar a variável 'server'.
-CMD ["gunicorn", "--bind", "0.0.0.0:8050", "run_secure_app:server"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8050", "--timeout", "120", "src.run_secure_app:server"]
