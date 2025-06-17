@@ -1,8 +1,4 @@
-Com base na estrutura inicial do projeto extraído do arquivo `SINTRA-SINTRA_V4.zip`, aqui está um exemplo profissional e detalhado de um arquivo `README.md` para documentar o projeto:
-
----
-
-# SINTRA V4 - Sistema Inteligente de Análise de Trânsito e Riscos de Acidentes
+# SINTRA - Sistema Inteligente de Análise de Trânsito e Riscos de Acidentes
 
 ## 📌 Introdução
 
