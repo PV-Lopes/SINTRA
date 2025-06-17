@@ -2,7 +2,7 @@
 
 ## 📌 Introdução
 
-**SINTRA V4** é um sistema inteligente desenvolvido para análise de dados de trânsito e predição de riscos de acidentes. O projeto tem como objetivo auxiliar gestores públicos, pesquisadores e agentes de mobilidade urbana na identificação de padrões críticos, contribuindo com a formulação de políticas preventivas e com a melhoria da segurança viária.
+**SINTRA** é um sistema inteligente desenvolvido para análise de dados de trânsito e predição de riscos de acidentes. O projeto tem como objetivo auxiliar gestores públicos, pesquisadores e agentes de mobilidade urbana na identificação de padrões críticos, contribuindo com a formulação de políticas preventivas e com a melhoria da segurança viária.
 
 Combinando dados reais de acidentes, população e infraestrutura urbana, o sistema utiliza **modelos de aprendizado de máquina** para prever áreas com maior risco e apresenta os resultados de forma acessível por meio de um **dashboard interativo**.
 
@@ -23,17 +23,19 @@ Combinando dados reais de acidentes, população e infraestrutura urbana, o sist
 ```bash
 SINTRA_V4/
 ├── data/
-│   ├── raw/                  # Dados brutos de entrada (DATATRAN, IBGE, etc.)
-│   ├── processed/            # Dados limpos e tratados
-│   └── models/               # Modelos treinados (.pkl)
+│   ├── raw/                      # Dados brutos de entrada (DATATRAN, IBGE, etc.)
+│   ├── processed/                # Dados limpos e tratados
+│   └── models/                   # Modelos treinados (.pkl)
 ├── reports/
 │   └── relatorio_sinistros.pdf  # Relatório final em PDF
 ├── src/
-│   ├── data_collection.py    # Script de coleta e limpeza de dados
-│   ├── dashboard.py          # Interface do dashboard com visualizações
-│   └── model.py              # (opcional) Treinamento e avaliação dos modelos
-├── requirements.txt          # Dependências do projeto
-└── README.md                 # Documentação do projeto
+│   ├── data_collection.py        # Script de coleta de dados
+│   ├── data_processing_pandas.py # Script de Limpeza de dados
+│   ├── gerar_relatorio.py        # Gera o relatorio do /reports
+│   ├── dashboard.py              # Interface do dashboard com visualizações
+│   └── ml_pipeline.py            # Treinamento e avaliação dos modelos (Em fase de teste)
+├── requirements.txt              # Dependências do projeto
+└── README.md                     # Documentação do projeto
 ```
 
 ---
@@ -50,11 +52,11 @@ SINTRA_V4/
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/seu-usuario/SINTRA_V4.git
-cd SINTRA_V4/SINTRA-SINTRA_V4
+git clone https://github.com/PV-Lopes/SINTRA.git
+cd SINTRA
 ```
 
-2. Crie um ambiente virtual (opcional, mas recomendado):
+2. Crie um ambiente virtual (opcional):
 
 ```bash
 python -m venv venv
@@ -67,7 +69,7 @@ source venv/bin/activate  # No Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. Execute o dashboard (opcional):
+4. Execute o dashboard:
 
 ```bash
 python src/dashboard.py
@@ -116,12 +118,3 @@ O projeto gera automaticamente:
 
 Contribuições são bem-vindas! Abra uma *issue* ou envie um *pull request*. Sugestões de novos modelos, fontes de dados e melhorias na visualização são especialmente encorajadas.
 
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a **MIT License** – veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
----
-
-Se quiser, posso gerar esse arquivo `README.md` automaticamente dentro do projeto. Deseja que eu crie o arquivo diretamente no diretório extraído?
