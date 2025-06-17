@@ -97,6 +97,21 @@ def setup_mfa(user_email):
 
 
 # --- FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN ---
+
+LOGIN_STYLE = """
+<style>
+    body { font-family: Arial, sans-serif; background-color: #121212; color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    .login-container { background-color: #1e1e1e; padding: 40px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); text-align: center; width: 100%; max-width: 400px; }
+    h1 { color: #1976D2; margin-bottom: 30px; }
+    form { display: flex; flex-direction: column; }
+    input[type="email"], input[type="password"], input[type="text"] { background-color: #333; border: 1px solid #555; color: #f0f0f0; padding: 12px; margin-bottom: 20px; border-radius: 5px; font-size: 16px; }
+    input[type="submit"] { background-color: #1976D2; color: white; border: none; padding: 12px; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; transition: background-color 0.3s; }
+    input[type="submit"]:hover { background-color: #1565C0; }
+    a { color: #1976D2; text-decoration: none; margin-top: 20px; display: inline-block; }
+    a:hover { text-decoration: underline; }
+    .error { color: #ff5252; margin-top: -10px; margin-bottom: 15px; font-weight: bold; }
+</style>
+"""
 def get_login_form_html(error=None):
     error_html = f'<p style="color:red;">{error}</p>' if error else ""
     return f'''
