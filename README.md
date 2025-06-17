@@ -1,202 +1,131 @@
-# 🚦SINTRA (Sistema Inteligente de Prevenção de Sinistros no Trânsito)
-
-## 🧭 Overview
-
-**SIPAT** Sistema Inteligente de Prevençao de Acidentes de Trânsito...
-
----
-## Website link:
-
-https://webapp-sabor-caseiro.azurewebsites.net (remover ou substituir)
-
-## ✅ Features
-
-- Table reservation with date and time (remover ou substituir)
-- Order management (remover ou substituir)
-- Scalable backend using Node.js
-- Automatic CI/CD through GitHub Actions
-- Infrastructure as Code (IaC) using Terraform
-- Azure-ready deployment
+Com base na estrutura inicial do projeto extraído do arquivo `SINTRA-SINTRA_V4.zip`, aqui está um exemplo profissional e detalhado de um arquivo `README.md` para documentar o projeto:
 
 ---
 
-## 🛠️ Tech Stack
+# SINTRA V4 - Sistema Inteligente de Análise de Trânsito e Riscos de Acidentes
 
-- **Node.js** 
-- **Express**
-- **Terraform (Azure Provider)**
-- **GitHub Actions**
-- **VSCode + JSON Configs**
+## 📌 Introdução
 
----
+**SINTRA V4** é um sistema inteligente desenvolvido para análise de dados de trânsito e predição de riscos de acidentes. O projeto tem como objetivo auxiliar gestores públicos, pesquisadores e agentes de mobilidade urbana na identificação de padrões críticos, contribuindo com a formulação de políticas preventivas e com a melhoria da segurança viária.
 
-## 📁 Project Structure
-```bash
-├── .github                     # GitHub Actions for CI/CD
-│   └── workflows               # Contains workflow definitions
-│       └── deploy.yml          # Workflow file that automates the deployment process
-├── public                      # Static assets served by the web application
-│   ├── css                     # Stylesheets (CSS)
-│   ├── img                     # Image assets
-│   ├── script                  # Front-end JavaScript files
-│   └── index.html              # Main HTML file for the web interface
-├── app.js                      # Express server
-├── package.json                # Dependencies
-├── Staging/                    # Infrastructure using Terraform
-│   ├── main.tf                 # Azure infrastructure definition
-│   └── terraform.tfstate       # Terraform state file
-├── README.md                   # Project documentation
-```
+Combinando dados reais de acidentes, população e infraestrutura urbana, o sistema utiliza **modelos de aprendizado de máquina** para prever áreas com maior risco e apresenta os resultados de forma acessível por meio de um **dashboard interativo**.
 
 ---
 
-## 📦 Installation Guide
+## 🚀 Funcionalidades Principais
 
-### Prerequisites
-
-| Technology | Recommended Version |
-|------------|---------------------|
-| Node.js    | >= 18.x             |
-| NPM        | >= 9.x              |
-| Terraform  | >= 1.5              |
-| Azure Account | ✔️ Required       |
+* Coleta automatizada e pré-processamento de dados públicos (DATATRAN, IBGE, etc.)
+* Predição do risco de acidentes com base em múltiplos fatores
+* Visualização interativa de sinistros por região e por causa
+* Relatórios analíticos em PDF
+* Estrutura modular e expansível
 
 ---
 
-### Local Installation
+## 📁 Estrutura do Projeto
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/your-user/Sabor-Caseiro-Restaurant.git
-cd Sabor-Caseiro-Restaurant
-
-# 2. Install dependencies
-npm install
-
-# 3. Run the application
-node app.js
-```
-
-> The app will be available at:
-```
-http://localhost:3000
+SINTRA_V4/
+├── data/
+│   ├── raw/                  # Dados brutos de entrada (DATATRAN, IBGE, etc.)
+│   ├── processed/            # Dados limpos e tratados
+│   └── models/               # Modelos treinados (.pkl)
+├── reports/
+│   └── relatorio_sinistros.pdf  # Relatório final em PDF
+├── src/
+│   ├── data_collection.py    # Script de coleta e limpeza de dados
+│   ├── dashboard.py          # Interface do dashboard com visualizações
+│   └── model.py              # (opcional) Treinamento e avaliação dos modelos
+├── requirements.txt          # Dependências do projeto
+└── README.md                 # Documentação do projeto
 ```
 
 ---
 
-### Cloud Deployment with Terraform (Azure)
+## 🛠️ Guia de Instalação
 
-1. Authenticate via Azure CLI  
+### ✅ Pré-requisitos
+
+* Python 3.9 ou superior
+* pip ou ambiente virtual (recomendado)
+
+### 🔧 Passos para instalação
+
+1. Clone o repositório:
+
 ```bash
-az login
+git clone https://github.com/seu-usuario/SINTRA_V4.git
+cd SINTRA_V4/SINTRA-SINTRA_V4
 ```
 
-2. Go to the `Staging/` folder  
+2. Crie um ambiente virtual (opcional, mas recomendado):
+
 ```bash
-cd Staging/
+python -m venv venv
+source venv/bin/activate  # No Windows: venv\Scripts\activate
 ```
 
-3. Initialize Terraform  
+3. Instale as dependências:
+
 ```bash
-terraform init
+pip install -r requirements.txt
 ```
 
-4. Apply the provisioning plan  
+4. Execute o dashboard (opcional):
+
 ```bash
-terraform apply
+python src/dashboard.py
 ```
-5. Confirm with `yes` when prompted
+
+> Certifique-se de que os arquivos de modelo `.pkl` estejam na pasta correta (`/data/models`) para o funcionamento completo da aplicação.
 
 ---
 
-## 🔌 API Reference
+## 📊 Desenvolvimento e Tecnologias
 
-### `GET /`
-
-- **Description:** Returns the system’s welcome message.
-- **Response:**
-```json
-{
-  "message": "Welcome to Sabor Caseiro Restaurant!"
-}
-```
+* **Python**: linguagem principal
+* **Pandas / NumPy**: manipulação de dados
+* **Scikit-learn / Pickle**: criação e exportação dos modelos de ML
+* **Plotly / Dash**: visualização de dados em dashboard
+* **Matplotlib / Seaborn**: geração de gráficos estatísticos
+* **PDFKit**: exportação de relatórios
 
 ---
 
-### `POST /reserva`
+## 📈 Modelo de Machine Learning
 
-- **Description:** Create a new table reservation.
-- **Request Body:**
-```json
-{
-  "nome": "John",
-  "mesa": 5,
-  "data": "2025-06-10",
-  "hora": "19:30"
-}
-```
+O modelo `modelo_risco_acidente.pkl` utiliza regressão logística para prever o risco de acidentes com base em:
 
-- **Response:**
-```json
-{
-  "status": "Reservation confirmed",
-  "reservaId": "abc123"
-}
-```
+* Tipo de via
+* Horário
+* Condições climáticas
+* População local
+* Frequência histórica de acidentes
+
+Os dados são padronizados e os modelos treinados usando validação cruzada, garantindo robustez nas previsões.
 
 ---
 
-### `GET /pedidos`
+## 📃 Relatórios e Saídas
 
-- **Description:** Fetch all active orders.
-- **Response:**
-```json
-[
-  {
-    "pedidoId": "xyz789",
-    "mesa": 5,
-    "itens": ["Lasagna", "Orange Juice"]
-  }
-]
-```
+O projeto gera automaticamente:
+
+* Arquivo `sinistros_processados.csv` com dados prontos para análise
+* Arquivo `relatorio_sinistros.pdf` com gráficos e insights
+* Dashboard interativo com filtros dinâmicos
 
 ---
 
-## 🤝 Contribution Guide
+## 📌 Contribuição
 
-### How to Contribute
-
-1. **Fork the repository**  
-2. **Create a feature branch:**  
-```bash
-git checkout -b feature/your-feature
-```
-3. **Commit your changes with meaningful messages:**  
-```bash
-git commit -m "feat: add new orders endpoint"
-```
-4. **Push your branch and open a Pull Request**
+Contribuições são bem-vindas! Abra uma *issue* ou envie um *pull request*. Sugestões de novos modelos, fontes de dados e melhorias na visualização são especialmente encorajadas.
 
 ---
 
-### Pull Request Rules
+## 📄 Licença
 
-- Follow the existing code style in `app.js`
-- Always document new endpoints in the API section
-- Include basic testing where applicable
+Este projeto está licenciado sob a **MIT License** – veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ---
 
-## 📞 Contact
-- 👤 Developer: Rayra Lima
-- 📧 Email: rayrasilvafiction@gmail.com  
-- 🌐 GitHub: https://github.com/Rayralima
-
----
-
-## 🛡️ License
-
-Este é um projeto para fins educacionais 
-
-
-˙✧˖°🦊 ༘ ⋆｡˚
+Se quiser, posso gerar esse arquivo `README.md` automaticamente dentro do projeto. Deseja que eu crie o arquivo diretamente no diretório extraído?
