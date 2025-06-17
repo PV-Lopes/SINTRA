@@ -32,7 +32,7 @@ with PdfPages(pdf_path) as pdf:
             pdf.savefig(); plt.close()
 
         if 'tipo_acidente' in df.columns:
-            plt.figure(figsize=(12, 6))
+            plt.figure(figsize=(18, 6))
             sns.countplot(data=df, y="tipo_acidente", order=df['tipo_acidente'].value_counts().index)
             plt.title("💥 Tipos de Sinistro Mais Frequentes")
             pdf.savefig(); plt.close()
