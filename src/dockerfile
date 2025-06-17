@@ -1,0 +1,20 @@
+# 1. Imagem Base
+# versão 3.11,
+FROM python:3.11-slim
+
+# 2. Diretório de Trabalho.
+WORKDIR /app
+
+# 3. Instalação de Dependências.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. Copiar a Aplicação.
+COPY . .
+
+# 5. Expor a Porta.
+EXPOSE 8050
+
+# 6. Comando de Execução.
+# Ele vai executar o arquivo 'run_secure_app.py' e encontrar a variável 'server'.
+CMD ["gunicorn", "--bind", "0.0.0.0:8050", "run_secure_app:server"]
