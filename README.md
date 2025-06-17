@@ -1,4 +1,4 @@
-# SINTRA - Sistema Inteligente de Análise de Trânsito e Riscos de Acidentes
+# 🚦SINTRA - Sistema Inteligente de Análise de Trânsito e Riscos de Acidentes
 
 ## 📌 Introdução
 
