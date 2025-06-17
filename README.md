@@ -114,6 +114,23 @@ O projeto gera automaticamente:
 
 ---
 
+🔐 **Segurança Implementada**
+
+O acesso ao dashboard é protegido por uma camada de autenticação para garantir que apenas usuários autorizados possam visualizar os dados. As seguintes funcionalidades foram implementadas:
+* **Autenticação de Usuário:** Sistema de login com e-mail e senha utilizando Flask-Login para gerenciar as sessões de forma segura.
+* **Autenticação de Múltiplos Fatores (MFA):** Suporte para senhas de uso único baseadas em tempo (TOTP), compatível com aplicativos como Google Authenticator, utilizando a biblioteca `pyotp`.
+* **Proteção de Rotas:** Acesso ao dashboard e suas funcionalidades internas é bloqueado para usuários não autenticados.
+* **Uso de Variáveis de Ambiente:** A `SECRET_KEY`, utilizada para assinar as sessões de usuário, é carregada a partir de variáveis de ambiente e não está exposta no código-fonte, seguindo as melhores práticas de segurança.
+
+☁️ **Implantação na Nuvem (Render)**
+
+Esta aplicação está configurada para deploy na plataforma **Render**, uma alternativa moderna que não exige cartão de crédito para os planos gratuitos.
+* **Containerização com Docker:** O projeto utiliza um `Dockerfile` para empacotar a aplicação e todas as suas dependências em um contêiner, garantindo um ambiente consistente e reprodutível da máquina local para a produção.
+* **Deploy Contínuo:** O serviço no Render está conectado ao repositório do GitHub, permitindo que novas versões sejam implantadas automaticamente a cada `push` para a branch principal.
+* **URL da Aplicação:** A aplicação está disponível publicamente no seguinte endereço:
+    * [link-do-seu-dashboard.onrender.com](https://link-do-seu-dashboard.onrender.com)
+
+
 ## 📌 Contribuição
 
 Contribuições são bem-vindas! Abra uma *issue* ou envie um *pull request*. Sugestões de novos modelos, fontes de dados e melhorias na visualização são especialmente encorajadas.
