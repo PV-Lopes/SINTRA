@@ -1,8 +1,8 @@
-# 🚦SIPAT
+# 🚦SINTRA (Sistema Inteligente de Prevenção de Sinistros no Trânsito)
 
 ## 🧭 Overview
 
-**SIPAT** Sistema Inteligente de Prevençao de Acidentes de Trânsito
+**SIPAT** Sistema Inteligente de Prevençao de Acidentes de Trânsito...
 
 ---
 ## Website link:
