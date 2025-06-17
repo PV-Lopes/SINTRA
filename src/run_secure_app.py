@@ -7,11 +7,9 @@ import pyotp
 import qrcode
 import io
 import base64
+from .dashboard import app
 
 load_dotenv()
-
-# 1. Importa a variável 'app'
-from dashboard import app
 
 # --- INÍCIO DA CONFIGURAÇÃO DE SEGURANÇA ---
 server = app.server
