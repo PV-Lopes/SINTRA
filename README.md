@@ -73,7 +73,7 @@ SINTRA/
     ```
 
 6.  Acesse a aplicação:
-    * Para configurar o MFA pela primeira vez, acesse `http://127.0.0.1:8050/setup/mfa/aluno@exemplo.com`.
+    * Para configurar o MFA pela primeira vez, acesse `http://127.0.0.1:8050/setup/mfa/usuarioteste@exemplo.com`.
     * Para fazer login, acesse `http://127.0.0.1:8050/login`.
     * O dashboard estará disponível em `http://127.0.0.1:8050/` após o login.
 
