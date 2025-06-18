@@ -15,6 +15,7 @@ Combinando dados reais de acidentes, população e infraestrutura urbana, o sist
 
 📁 **Estrutura do Projeto**
 
+````bash
 SINTRA/
 ├── data/
 │   ├── raw/                      # Dados brutos de entrada (DATATRAN, IBGE, etc.)
@@ -32,7 +33,7 @@ SINTRA/
 ├── Dockerfile                    # Configuração do contêiner para deploy
 ├── .env                          # Arquivo para variáveis de ambiente locais (NÃO ENVIAR PARA O GIT)
 └── README.md                     # Documentação do projeto
-
+````
 
 🛠️ **Guia de Instalação**
 
