@@ -24,8 +24,8 @@ class User(UserMixin):
         self.id = id
 
 users_db = {
-    'usuarioteste@exemplo.com': {
-        'password': generate_password_hash('Tr@n$iT0191!', method='pbkdf2:sha256'),
+    'APP_USER_EMAIL': {
+        'password': generate_password_hash('OTP_SECRET', method='pbkdf2:sha256'),
         'otp_secret': pyotp.random_base32()
     }
 }
@@ -127,7 +127,7 @@ def get_login_form_html(error=None):
             <input type="password" name="password" placeholder="Senha" required>
             <input type="submit" value="Próximo">
         </form>
-        <a href="/setup/mfa/usuarioteste@exemplo.com">Primeiro acesso? Configure seu PIN.</a>
+        <a href="/setup/mfa/APP_USER_EMAIL">Primeiro acesso? Configure seu PIN.</a>
     </div></body></html>
     '''
 
