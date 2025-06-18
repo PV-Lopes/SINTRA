@@ -92,7 +92,7 @@ def setup_mfa(user_email):
     <div class="login-container">
         <h1>Configure seu App de Autenticação</h1>
         <p>Escaneie o QR Code abaixo com um app como o Google Authenticator.</p>
-        <img src="data:image/png;base64,{img_str}" style="border: 5px solid #fff;"/>
+        <img src="data:image/png;base64,{img_str}" style="width: 250px; height: 250px; border: 5px solid #1976D2; border-radius: 8px;"/>
         <a href="/login">Voltar para o Login</a>
     </div></body></html>
     '''
