@@ -114,7 +114,7 @@ O projeto gera automaticamente:
 
 ---
 
-🔐 **Segurança Implementada**
+## 🔐 **Segurança Implementada**
 
 O acesso ao dashboard é protegido por uma camada de autenticação para garantir que apenas usuários autorizados possam visualizar os dados. As seguintes funcionalidades foram implementadas:
 * **Autenticação de Usuário:** Sistema de login com e-mail e senha utilizando Flask-Login para gerenciar as sessões de forma segura.
@@ -122,7 +122,9 @@ O acesso ao dashboard é protegido por uma camada de autenticação para garanti
 * **Proteção de Rotas:** Acesso ao dashboard e suas funcionalidades internas é bloqueado para usuários não autenticados.
 * **Uso de Variáveis de Ambiente:** A `SECRET_KEY`, utilizada para assinar as sessões de usuário, é carregada a partir de variáveis de ambiente e não está exposta no código-fonte, seguindo as melhores práticas de segurança.
 
-☁️ **Implantação na Nuvem (Render)**
+---
+
+## ☁️ **Implantação na Nuvem (Render)**
 
 Esta aplicação está configurada para deploy na plataforma **Render**, uma alternativa moderna que não exige cartão de crédito para os planos gratuitos.
 * **Containerização com Docker:** O projeto utiliza um `Dockerfile` para empacotar a aplicação e todas as suas dependências em um contêiner, garantindo um ambiente consistente e reprodutível da máquina local para a produção.
@@ -130,6 +132,7 @@ Esta aplicação está configurada para deploy na plataforma **Render**, uma alt
 * **URL da Aplicação:** A aplicação está disponível publicamente no seguinte endereço:
     * [link-do-seu-dashboard.onrender.com](https://link-do-seu-dashboard.onrender.com)
 
+---
 
 ## 📌 Contribuição
 
