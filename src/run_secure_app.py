@@ -66,7 +66,7 @@ def login_mfa():
             session.pop('email_for_mfa', None)
             return redirect('/')
         else:
-            return get_mfa_form_html(error="Código MFA inválido.")
+            return get_mfa_form_html(error="Código PIN inválido.")
             
     return get_mfa_form_html()
     
@@ -127,7 +127,7 @@ def get_login_form_html(error=None):
             <input type="password" name="password" placeholder="Senha" required>
             <input type="submit" value="Próximo">
         </form>
-        <a href="/setup/mfa/aluno@exemplo.com">Primeiro acesso? Configure seu MFA.</a>
+        <a href="/setup/mfa/usuarioteste@exemplo.com">Primeiro acesso? Configure seu PIN.</a>
     </div></body></html>
     '''
 
