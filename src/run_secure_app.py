@@ -13,21 +13,19 @@ load_dotenv()
 
 # --- INÍCIO DA CONFIGURAÇÃO DE SEGURANÇA ---
 server = app.server
-server.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'uma-chave-padrao')
+server.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'chave-padrao')
 
-# 3. Configura o Flask-Login
 login_manager = LoginManager()
 login_manager.init_app(server)
 login_manager.login_view = '/login'
 
-# 4. Define o modelo de usuário
 class User(UserMixin):
     def __init__(self, id):
         self.id = id
 
 users_db = {
-    'aluno@exemplo.com': {
-        'password': generate_password_hash('123', method='pbkdf2:sha256'),
+    'APP_USER_EMAIL': {
+        'password': generate_password_hash('OTP_SECRET', method='pbkdf2:sha256'),
         'otp_secret': pyotp.random_base32()
     }
 }
@@ -68,7 +66,7 @@ def login_mfa():
             session.pop('email_for_mfa', None)
             return redirect('/')
         else:
-            return get_mfa_form_html(error="Código MFA inválido.")
+            return get_mfa_form_html(error="Código PIN inválido.")
             
     return get_mfa_form_html()
     
@@ -89,15 +87,19 @@ def setup_mfa(user_email):
     img.save(buf)
     buf.seek(0)
     img_str = base64.b64encode(buf.getvalue()).decode('utf-8')
-    return f'''<body style="text-align:center;">
-                <h1>Configure seu App de Autenticação</h1><p>Escaneie o QR Code.</p>
-                <img src="data:image/png;base64,{img_str}"/>
-                <p>Depois, volte para a <a href="/login">página de login</a>.</p></body>'''
+    return f'''
+    <!DOCTYPE html><html><head><title>Setup MFA</title>{LOGIN_STYLE}</head><body>
+    <div class="login-container">
+        <h1>Configure seu App de Autenticação</h1>
+        <p>Escaneie o QR Code abaixo com um app como o Google Authenticator.</p>
+        <img src="data:image/png;base64,{img_str}" style="width: 250px; height: 250px; border: 5px solid #1976D2; border-radius: 8px;"/>
+        <a href="/login">Voltar para o Login</a>
+    </div></body></html>
+    '''
 # --- FIM DAS ROTAS DE AUTENTICAÇÃO ---
 
 
-# --- FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN ---
-
+# ---FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN ---
 LOGIN_STYLE = """
 <style>
     body { font-family: Arial, sans-serif; background-color: #121212; color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
@@ -112,44 +114,48 @@ LOGIN_STYLE = """
     .error { color: #ff5252; margin-top: -10px; margin-bottom: 15px; font-weight: bold; }
 </style>
 """
+
 def get_login_form_html(error=None):
-    error_html = f'<p style="color:red;">{error}</p>' if error else ""
+    error_html = f'<p class="error">{error}</p>' if error else ""
     return f'''
-        <h1>Login - Passo 1 de 2</h1>
+    <!DOCTYPE html><html><head><title>Login</title>{LOGIN_STYLE}</head><body>
+    <div class="login-container">
+        <h1>🚦Bem-vindo ao SINTRA!</h1>
         {error_html}
         <form method="post">
-            E-mail: <input type="email" name="email" required><br>
-            Senha: <input type="password" name="password" required><br>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="password" placeholder="Senha" required>
             <input type="submit" value="Próximo">
         </form>
-        <p>Primeiro acesso? <a href="/setup/mfa/aluno@exemplo.com">Configure seu MFA aqui</a>.</p>
+        <a href="/setup/mfa/APP_USER_EMAIL">Primeiro acesso? Configure seu PIN.</a>
+    </div></body></html>
     '''
+
 def get_mfa_form_html(error=None):
-    error_html = f'<p style="color:red;">{error}</p>' if error else ""
+    error_html = f'<p class="error">{error}</p>' if error else ""
     return f'''
-        <h1>Login - Passo 2 de 2 (MFA)</h1>
+    <!DOCTYPE html><html><head><title>Verificação MFA</title>{LOGIN_STYLE}</head><body>
+    <div class="login-container">
+        <h1>Insira sua autenticação</h1>
         {error_html}
         <form method="post">
-            Código de Autenticação:<br>
-            <input type="text" name="otp_code" required maxlength="6"><br>
+            <input type="text" name="otp_code" placeholder="Código de 6 dígitos" required maxlength="6" pattern="\\d*">
             <input type="submit" value="Verificar e Entrar">
         </form>
+    </div></body></html>
     '''
 # --- FIM DAS FUNÇÕES AUXILIARES ---
 
 
-# --- O "GUARDA" DE SEGURANÇA ---
+# --- O "GUARDA-COSTAS" ---
 @server.before_request
 def protect_routes():
-    # Permite acesso livre às rotas de login, mfa, setup e arquivos estáticos do Dash
     public_paths = ['/login', '/login/mfa', '/logout']
     if request.path in public_paths or request.path.startswith('/setup/mfa') or request.path.startswith('/_dash'):
         return
-
-    # redireciona para o login
     if not current_user.is_authenticated:
         return redirect('/login')
-# --- FIM DO "GUARDA" ---
+# --- FIM DO "GUARDA-COSTAS" ---
 
 if __name__ == '__main__':
     app.run(debug=True)
