@@ -120,7 +120,7 @@ Esta aplicação está configurada para deploy na plataforma **Render**, uma alt
 * **Containerização com Docker:** O projeto utiliza um `Dockerfile` para empacotar a aplicação e todas as suas dependências em um contêiner, garantindo um ambiente consistente e reprodutível da máquina local para a produção.
 * **Deploy Contínuo:** O serviço no Render está conectado ao repositório do GitHub, permitindo que novas versões sejam implantadas automaticamente a cada `push` para a branch principal.
 * **URL da Aplicação:** A aplicação está disponível publicamente no seguinte endereço:
-    * [link-do-seu-dashboard.onrender.com](https://sintra-projeto.onrender.com/)
+    * [link-SINTRA](https://sintra-projeto.onrender.com/)
 
 📌 **Contribuição**
 
