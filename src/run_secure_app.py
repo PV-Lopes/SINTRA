@@ -7,15 +7,13 @@ import pyotp
 import qrcode
 import io
 import base64
-
-# O import relativo está correto, mas lembre-se de como executar o arquivo
 from .dashboard import app
 
 load_dotenv()
 
 # --- INÍCIO DA CONFIGURAÇÃO DE SEGURANÇA ---
 server = app.server
-server.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'uma-chave-padrao')
+server.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'chave-padrao')
 
 login_manager = LoginManager()
 login_manager.init_app(server)
@@ -26,8 +24,8 @@ class User(UserMixin):
         self.id = id
 
 users_db = {
-    'aluno@exemplo.com': {
-        'password': generate_password_hash('123', method='pbkdf2:sha256'),
+    'usuarioteste@exemplo.com': {
+        'password': generate_password_hash('Tr@n$iT0191!', method='pbkdf2:sha256'),
         'otp_secret': pyotp.random_base32()
     }
 }
@@ -78,7 +76,6 @@ def logout():
     logout_user()
     return redirect('/login')
 
-# [ATUALIZADO] Rota de setup agora com o mesmo estilo das outras
 @server.route('/setup/mfa/<user_email>')
 def setup_mfa(user_email):
     
@@ -102,7 +99,7 @@ def setup_mfa(user_email):
 # --- FIM DAS ROTAS DE AUTENTICAÇÃO ---
 
 
-# --- [ATUALIZADO] FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN (COM ESTILO) ---
+# ---FUNÇÕES AUXILIARES PARA GERAR AS PÁGINAS DE LOGIN ---
 LOGIN_STYLE = """
 <style>
     body { font-family: Arial, sans-serif; background-color: #121212; color: #f0f0f0; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
@@ -123,7 +120,7 @@ def get_login_form_html(error=None):
     return f'''
     <!DOCTYPE html><html><head><title>Login</title>{LOGIN_STYLE}</head><body>
     <div class="login-container">
-        <h1>Login - Passo 1 de 2</h1>
+        <h1>🚦Bem-vindo ao SINTRA!</h1>
         {error_html}
         <form method="post">
             <input type="email" name="email" placeholder="E-mail" required>
@@ -139,7 +136,7 @@ def get_mfa_form_html(error=None):
     return f'''
     <!DOCTYPE html><html><head><title>Verificação MFA</title>{LOGIN_STYLE}</head><body>
     <div class="login-container">
-        <h1>Login - Passo 2 de 2 (MFA)</h1>
+        <h1>Insira sua autenticação</h1>
         {error_html}
         <form method="post">
             <input type="text" name="otp_code" placeholder="Código de 6 dígitos" required maxlength="6" pattern="\\d*">
@@ -150,7 +147,7 @@ def get_mfa_form_html(error=None):
 # --- FIM DAS FUNÇÕES AUXILIARES ---
 
 
-# --- O "GUARDA" DE SEGURANÇA ---
+# --- O "GUARDA-COSTAS" ---
 @server.before_request
 def protect_routes():
     public_paths = ['/login', '/login/mfa', '/logout']
@@ -158,8 +155,7 @@ def protect_routes():
         return
     if not current_user.is_authenticated:
         return redirect('/login')
-# --- FIM DO "GUARDA" ---
+# --- FIM DO "GUARDA-COSTAS" ---
 
 if __name__ == '__main__':
-    # Lembre-se de executar como um módulo para evitar o ImportError
     app.run(debug=True)
