@@ -33,7 +33,7 @@ SINTRA_V4/
 │   ├── data_processing_pandas.py # Script de Limpeza de dados
 │   ├── gerar_relatorio.py        # Gera o relatorio do /reports
 │   ├── dashboard.py              # Interface do dashboard com visualizações
-│   └──dockerfile
+│   └──dockerfile                 #Guia de instalação para o Render
 │   └── gerar_hash.py             #Gera hash automaticamente
 │   └──gerar_relatorio.py         #Gera o relatorio automatico
 │   └── ml_pipeline.py            # Treinamento e avaliação dos modelos (Em fase de teste)
