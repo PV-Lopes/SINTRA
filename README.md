@@ -1,14 +1,11 @@
-# 🚦SINTRA - Sistema Inteligente de Análise de Trânsito e Riscos de Sinistros
 
-## 📌 Introdução
 
-**SINTRA** é um sistema inteligente desenvolvido para análise de dados de trânsito e predição de riscos de acidentes. O projeto tem como objetivo auxiliar gestores públicos, pesquisadores e agentes de mobilidade urbana na identificação de padrões críticos, contribuindo com a formulação de políticas preventivas e com a melhoria da segurança viária.
+📌 **Introdução**
 
-Combinando dados reais de acidentes, população e infraestrutura urbana, o sistema utiliza **modelos de aprendizado de máquina** para prever áreas com maior risco e apresenta os resultados de forma acessível por meio de um **dashboard interativo**.
+SINTRA é um sistema inteligente desenvolvido para análise de dados de trânsito e predição de riscos de acidentes. O projeto tem como objetivo auxiliar gestores públicos, pesquisadores e agentes de mobilidade urbana na identificação de padrões críticos, contribuindo com a formulação de políticas preventivas e com a melhoria da segurança viária.
+Combinando dados reais de acidentes, população e infraestrutura urbana, o sistema utiliza modelos de aprendizado de máquina para prever áreas com maior risco e apresenta os resultados de forma acessível por meio de um dashboard interativo.
 
----
-
-## 🚀 Funcionalidades Principais
+🚀 **Funcionalidades Principais**
 
 * Coleta automatizada e pré-processamento de dados públicos (DATATRAN, IBGE, etc.)
 * Predição do risco de acidentes com base em múltiplos fatores
@@ -16,84 +13,83 @@ Combinando dados reais de acidentes, população e infraestrutura urbana, o sist
 * Relatórios analíticos em PDF
 * Estrutura modular e expansível
 
----
+📁 **Estrutura do Projeto**
 
-## 📁 Estrutura do Projeto
-
-```bash
-SINTRA_V4/
+SINTRA/
 ├── data/
 │   ├── raw/                      # Dados brutos de entrada (DATATRAN, IBGE, etc.)
 │   ├── processed/                # Dados limpos e tratados
 │   └── models/                   # Modelos treinados (.pkl)
 ├── reports/
-│   └── relatorio_sinistros.pdf  # Relatório final em PDF
+│   └── relatorio_sinistros.pdf   # Relatório final em PDF
 ├── src/
 │   ├── data_collection.py        # Script de coleta de dados
 │   ├── data_processing_pandas.py # Script de Limpeza de dados
 │   ├── gerar_relatorio.py        # Gera o relatorio do /reports
-│   ├── dashboard.py              # Interface do dashboard com visualizações
-│   └── ml_pipeline.py            # Treinamento e avaliação dos modelos (Em fase de teste)
+│   └── dashboard.py              # Interface do dashboard com visualizações
+├── run_secure_app.py             # Ponto de entrada da aplicação com camada de segurança
 ├── requirements.txt              # Dependências do projeto
+├── Dockerfile                    # Configuração do contêiner para deploy
+├── .env                          # Arquivo para variáveis de ambiente locais (NÃO ENVIAR PARA O GIT)
 └── README.md                     # Documentação do projeto
-```
 
----
 
-## 🛠️ Guia de Instalação
+🛠️ **Guia de Instalação**
 
-### ✅ Pré-requisitos
+✅ **Pré-requisitos**
 
 * Python 3.9 ou superior
 * pip ou ambiente virtual (recomendado)
 
-### 🔧 Passos para instalação
+🔧 **Passos para instalação**
 
-1. Clone o repositório:
+1.  Clone o repositório:
+    ```bash
+    git clone [https://github.com/PV-Lopes/SINTRA.git](https://github.com/PV-Lopes/SINTRA.git)
+    cd SINTRA
+    ```
 
-```bash
-git clone https://github.com/PV-Lopes/SINTRA.git
-cd SINTRA
-```
+2.  Crie um ambiente virtual (opcional):
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # No Windows: venv\Scripts\activate
+    ```
 
-2. Crie um ambiente virtual (opcional):
+3.  Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-```bash
-python -m venv venv
-source venv/bin/activate  # No Windows: venv\Scripts\activate
-```
+4.  **[IMPORTANTE]** Crie o arquivo de ambiente para a chave secreta:
+    * Crie um arquivo chamado `.env` na raiz do projeto.
+    * Adicione o seguinte conteúdo a ele:
+        ```
+        SECRET_KEY="coloque_aqui_uma_string_longa_e_aleatoria_para_sua_seguranca"
+        ```
 
-3. Instale as dependências:
+5.  Execute a aplicação segura:
+    ```bash
+    python run_secure_app.py
+    ```
 
-```bash
-pip install -r requirements.txt
-```
+6.  Acesse a aplicação:
+    * Para configurar o MFA pela primeira vez, acesse `http://127.0.0.1:8050/setup/mfa/aluno@exemplo.com`.
+    * Para fazer login, acesse `http://127.0.0.1:8050/login`.
+    * O dashboard estará disponível em `http://127.0.0.1:8050/` após o login.
 
-4. Execute o dashboard:
+📊 **Desenvolvimento e Tecnologias**
 
-```bash
-python src/dashboard.py
-```
+* **Python:** linguagem principal
+* **Pandas / NumPy:** manipulação de dados
+* **Scikit-learn / Pickle:** criação e exportação dos modelos de ML
+* **Plotly / Dash:** visualização de dados em dashboard
+* **Flask / Flask-Login:** camada de segurança e autenticação
+* **PyOTP:** geração de senhas de uso único para MFA
+* **Gunicorn:** servidor de aplicação para produção
 
-> Certifique-se de que os arquivos de modelo `.pkl` estejam na pasta correta (`/data/models`) para o funcionamento completo da aplicação.
-
----
-
-## 📊 Desenvolvimento e Tecnologias
-
-* **Python**: linguagem principal
-* **Pandas / NumPy**: manipulação de dados
-* **Scikit-learn / Pickle**: criação e exportação dos modelos de ML
-* **Plotly / Dash**: visualização de dados em dashboard
-* **Matplotlib / Seaborn**: geração de gráficos estatísticos
-* **PDFKit**: exportação de relatórios
-
----
-
-## 📈 Modelo de Machine Learning
+📈 **Modelo de Machine Learning**
 
 O modelo `modelo_risco_acidente.pkl` utiliza regressão logística para prever o risco de acidentes com base em:
-
 * Tipo de via
 * Horário
 * Condições climáticas
@@ -102,17 +98,12 @@ O modelo `modelo_risco_acidente.pkl` utiliza regressão logística para prever o
 
 Os dados são padronizados e os modelos treinados usando validação cruzada, garantindo robustez nas previsões.
 
----
-
-## 📃 Relatórios e Saídas
+📃 **Relatórios e Saídas**
 
 O projeto gera automaticamente:
-
 * Arquivo `sinistros_processados.csv` com dados prontos para análise
 * Arquivo `relatorio_sinistros.pdf` com gráficos e insights
 * Dashboard interativo com filtros dinâmicos
-
----
 
 🔐 **Segurança Implementada**
 
@@ -128,9 +119,8 @@ Esta aplicação está configurada para deploy na plataforma **Render**, uma alt
 * **Containerização com Docker:** O projeto utiliza um `Dockerfile` para empacotar a aplicação e todas as suas dependências em um contêiner, garantindo um ambiente consistente e reprodutível da máquina local para a produção.
 * **Deploy Contínuo:** O serviço no Render está conectado ao repositório do GitHub, permitindo que novas versões sejam implantadas automaticamente a cada `push` para a branch principal.
 * **URL da Aplicação:** A aplicação está disponível publicamente no seguinte endereço:
-    * [link-do-seu-dashboard.onrender.com](https://link-do-seu-dashboard.onrender.com)
+    * [link-do-seu-dashboard.onrender.com](https://link-do-seu-dashboard.onrender.com) (substitua pelo seu link real)
 
+📌 **Contribuição**
 
-## 📌 Contribuição
-
-Contribuições são bem-vindas! Abra uma *issue* ou envie um *pull request*. Sugestões de novos modelos, fontes de dados e melhorias na visualização são especialmente encorajadas.
+Contribuições são bem-vindas! Abra uma `issue` ou envie um `pull request`. Sugestões de novos modelos, fontes de dados e melhorias na visualização são especialmente encorajadas.
