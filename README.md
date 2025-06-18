@@ -31,7 +31,6 @@ SINTRA/
 ├── run_secure_app.py             # Ponto de entrada da aplicação com camada de segurança
 ├── requirements.txt              # Dependências do projeto
 ├── Dockerfile                    # Configuração do contêiner para deploy
-├── .env                          # Arquivo para variáveis de ambiente locais (NÃO ENVIAR PARA O GIT)
 └── README.md                     # Documentação do projeto
 ````
 
