@@ -39,7 +39,7 @@ SINTRA/
 ✅ **Pré-requisitos**
 
 * Python 3.9 ou superior
-* pip ou ambiente virtual (recomendado)
+* pip ou ambiente virtual
 
 🔧 **Passos para instalação**
 
@@ -49,7 +49,7 @@ SINTRA/
     cd SINTRA
     ```
 
-2.  Crie um ambiente virtual (opcional):
+2.  Crie um ambiente virtual:
     ```bash
     python -m venv venv
     source venv/bin/activate  # No Windows: venv\Scripts\activate
